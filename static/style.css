@@ -1,18 +1,18 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   background: #f0f4ff;
+  padding: 2em;
   color: #333;
   text-align: center;
-  padding: 2em;
 }
 
 .container {
-  background: white;
-  max-width: 600px;
+  max-width: 700px;
   margin: auto;
+  background: white;
   padding: 2em;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 form {
@@ -20,11 +20,9 @@ form {
   gap: 1em;
 }
 
-input[type="file"],
-select,
-button {
+select, input[type="file"], button {
   padding: 0.8em;
-  border-radius: 5px;
+  border-radius: 6px;
   border: 1px solid #ccc;
 }
 
@@ -39,11 +37,19 @@ button {
   margin-top: 2em;
 }
 
+pre {
+  text-align: left;
+  background: #eee;
+  padding: 1em;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}
+
 .buttons a {
   display: inline-block;
   margin: 10px;
   padding: 0.6em 1em;
-  background: #00aa00;
+  background: #28a745;
   color: white;
   text-decoration: none;
   border-radius: 6px;

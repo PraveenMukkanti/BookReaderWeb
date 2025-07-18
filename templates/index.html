@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>BookReader 🌍</title>
+  <title>BookReader Study Assistant</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <div class="container">
-    <h1>📘 Translate & Listen to Your Books</h1>
+    <h1>📘 Summarize & Listen to Study PDFs</h1>
 
     <form method="POST" enctype="multipart/form-data">
-      <label for="pdf_file">Upload PDF:</label>
+      <label>Upload PDF:</label>
       <input type="file" name="pdf_file" required>
 
       <label>Source Language:</label>
@@ -28,12 +28,26 @@
         <option value="hi">Hindi</option>
       </select>
 
-      <button type="submit">Translate & Convert</button>
+      <label>Summary Style:</label>
+      <select name="summary_mode">
+        <option value="basic">Basic Summary</option>
+        <option value="bullet">Bullet Points</option>
+        <option value="simple">Explain Like I'm 12</option>
+      </select>
+
+      <button type="submit">Summarize & Convert</button>
     </form>
+
+    {% if summary %}
+    <div class="results">
+      <h2>🧠 Summary Preview:</h2>
+      <pre>{{ summary }}</pre>
+    </div>
+    {% endif %}
 
     {% if audio_file %}
     <div class="results">
-      <h2>🎧 Your Audio Book:</h2>
+      <h2>🎧 Your Audio Summary:</h2>
       <audio controls>
         <source src="{{ url_for('serve_audio', filename=audio_file) }}" type="audio/mp3">
         Your browser does not support audio playback.
@@ -41,7 +55,7 @@
 
       <div class="buttons">
         <a href="{{ url_for('download_file', filename=audio_file) }}">⬇️ Download Audio</a>
-        <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20audio%20book:%20{{ request.url_root }}output_audio/{{ audio_file }}" target="_blank">
+        <a href="https://api.whatsapp.com/send?text=Listen%20to%20this%20audio%20summary:%20{{ request.url_root }}output_audio/{{ audio_file }}" target="_blank">
           📤 Share via WhatsApp
         </a>
       </div>
