@@ -28,7 +28,6 @@ def index():
             text = read_pdf(path)
             translated = translate_text(text, src_lang, tgt_lang)
             audio_path = text_to_speech(translated, tgt_lang)
-
             audio_file = os.path.basename(audio_path)
 
     return render_template('index.html', audio_file=audio_file)
@@ -42,4 +41,6 @@ def serve_audio(filename):
     return send_from_directory(app.config['AUDIO_FOLDER'], filename)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
