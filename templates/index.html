@@ -1,0 +1,52 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BookReader 🌍</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>📘 Translate & Listen to Your Books</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+      <label for="pdf_file">Upload PDF:</label>
+      <input type="file" name="pdf_file" required>
+
+      <label>Source Language:</label>
+      <select name="source_lang">
+        <option value="auto">Auto Detect</option>
+        <option value="en">English</option>
+        <option value="te">Telugu</option>
+        <option value="hi">Hindi</option>
+      </select>
+
+      <label>Target Language:</label>
+      <select name="target_lang">
+        <option value="en">English</option>
+        <option value="te">Telugu</option>
+        <option value="hi">Hindi</option>
+      </select>
+
+      <button type="submit">Translate & Convert</button>
+    </form>
+
+    {% if audio_file %}
+    <div class="results">
+      <h2>🎧 Your Audio Book:</h2>
+      <audio controls>
+        <source src="{{ url_for('serve_audio', filename=audio_file) }}" type="audio/mp3">
+        Your browser does not support audio playback.
+      </audio>
+
+      <div class="buttons">
+        <a href="{{ url_for('download_file', filename=audio_file) }}">⬇️ Download Audio</a>
+        <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20audio%20book:%20{{ request.url_root }}output_audio/{{ audio_file }}" target="_blank">📤 Share via WhatsApp</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
